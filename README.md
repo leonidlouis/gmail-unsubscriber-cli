@@ -1,12 +1,14 @@
-# Email Subscription Canceler
+# Gmail Subscription Canceler
 
 A CLI tool that identifies and cancels newsletter subscriptions by parsing technical `List-Unsubscribe` headers in your Gmail inbox.
 
 ## Features
 - **OAuth 2.0:** Secure authorization via official Google APIs.
 - **Smart Detection:** Uses RFC 2369 headers to find legitimate subscriptions.
+- **RFC 8058 Support:** Automatically handles "One-Click" HTTP POST unsubscribe requests.
 - **Auto-Unsubscribe:** Sends `mailto` requests automatically for supported lists.
 - **High-Frequency Filtering:** Focuses on your most active senders first.
+- **Safe Mode:** Includes a `--dry-run` option to simulate actions.
 
 ## Installation & Setup
 
@@ -65,12 +67,20 @@ To use this tool, you need to create a Google Cloud Project and enable the Gmail
    ```
 2. **Run the Tool:**
    ```bash
+   # Default scan (500 emails, threshold > 3)
    python gmail-unsub.py
+
+   # Custom scan depth and threshold
+   python gmail-unsub.py --limit 1000 --threshold 1
+
+   # Dry Run (Safe Mode - simulates actions)
+   python gmail-unsub.py --dry-run
    ```
 
-## Configuration
-- **Scan Depth:** Last 500 emails.
-- **Display Filter:** Only shows senders appearing > 5 times.
+## Configuration (CLI Arguments)
+- `--limit [N]`: Scan the last N emails (default: 500).
+- `--threshold [N]`: Only show senders with more than N emails (default: 3).
+- `--dry-run`: Simulate unsubscribe actions without actually sending requests or emails.
 
 ## Interaction
 - **[ID]:** Unsubscribe from a specific sender.
