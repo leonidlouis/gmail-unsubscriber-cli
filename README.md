@@ -17,7 +17,7 @@ A professional-grade CLI tool that identifies and cancels newsletter subscriptio
 2. **Activate & Run:**
    ```bash
    source .venv/bin/activate
-   python gmail_scanner.py
+   python gmail-unsub.py
    ```
 
 ## Configuration
